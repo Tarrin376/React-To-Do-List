@@ -23,6 +23,25 @@
     color: white;
 }
 
+.ticked {
+    background-image: url('../images/icon-check.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: hsl(9, 100%, 67%) !important;
+}
+
+.unticked {
+    width: 32px;
+    height: 30px;
+    border-radius: 50%;
+    background: hsl(237, 14%, 26%);
+}
+
+.unticked:hover {
+    background: hsl(9, 100%, 67%);
+}
+
 #completedColour {
     background-color: rgb(12, 199, 12);
     height: 10px;

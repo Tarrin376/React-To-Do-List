@@ -7,10 +7,22 @@ import '../styles/JobList.css';
 // date and comparing it with the completion date specified. This will then by presented to the user
 // via coloured circles e.g. 'aqua': active and 'rgb(12, 199, 12)': completed.
 function Job(props) {
+  const selectElement = (eventRaiser) => {
+    const target = eventRaiser.currentTarget;
+    if (!target.classList.contains('ticked')) {
+      target.classList.add('ticked');
+      target.children[0].classList.add('ticked');
+    }
+    else {
+      target.classList.remove('ticked');
+      target.children[0].classList.remove('ticked');
+    }
+  };
+
   // Job component that will be manipulated by the JobsList component.
   return (
     <div className='listItem' id='job'>
-        <div className='unticked'>
+        <div className='unticked' onClick={selectElement}>
             <div id='inner'></div>
         </div>
         <div className='jobInfo'>

@@ -42,17 +42,6 @@
     margin-top: 15px;
 }
 
-.unticked {
-    width: 32px;
-    height: 30px;
-    border-radius: 50%;
-    background: hsl(237, 14%, 26%);
-}
-
-.unticked:hover {
-    background: hsl(192, 100%, 67%);
-}
-
 #inner {
     width: 24px;
     height: 24px;
