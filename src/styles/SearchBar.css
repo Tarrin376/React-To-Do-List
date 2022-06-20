@@ -15,16 +15,16 @@
 }
 
 .errorMessage {
-    font-size: 15px;
+    font-size: 1rem;
     margin-left: 30px;
-    text-decoration: none !important;
-    color: rgb(253, 141, 37);
+    text-decoration: none;
+    color: hsl(0, 100%, 71%);
 }
 
 #searchBar {
     margin-bottom: 30px;
     border-radius: 7px;
-    font-size: 17px;
+    font-size: 1.2rem;
     color: white;
     display: block;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.274);
@@ -69,7 +69,7 @@
     border: none;
     background-color: transparent;
     font-size: 20px;
-    color: hsl(0, 0%, 98%);
+    color: hsl(236, 33%, 92%);
     outline: none;
     border-bottom: 1px solid hsl(237, 14%, 26%);
 }
@@ -94,6 +94,7 @@
 #addJob:hover {
     background-color: white;
     color: rgb(55, 33, 175);
+    font-size: 20px;
 }
 
 #findTask {
@@ -102,7 +103,7 @@
     height: 50px;
     width: calc(100% - 140px - 20px);
     border: 1px solid hsl(236, 24%, 11%);
-    border-radius: 15px;
+    border-radius: 5px;
     background-color: hsl(235, 24%, 19%);
     font-size: 20px;
     color: white;

@@ -34,6 +34,7 @@ header {
   padding-top: 10px;
   color: white;
   background-color: transparent;
+  user-select: none;
 }
 
 #toggleTheme {

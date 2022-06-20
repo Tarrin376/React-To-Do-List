@@ -2,23 +2,9 @@ import React from 'react'
 import Job from './Job';
 import '../styles/JobList.css';
 
-function highlightAction(index) {
-  const actions = [
-    document.getElementById('allFilter'),
-    document.getElementById('activeFilter'),
-    document.getElementById('completedFilter'),
-  ];
-  
-  const prevElement = actions.find((action) => action.classList.contains('selected'));
-  const newElement = actions[index];
-  
-  if (prevElement != null) prevElement.classList.remove('selected');
-  newElement.classList.add('selected');
-}
-
 // JobList react component that is used to render all of the user's completed and
 // active tasks. 
-function JobList({ tasks, update, getLocalStorage }) {
+function JobList({ tasks, update, getLocalStorage, highlightAction }) {
   // Responsible for removing a task by filtering the data by it's id.
   // Will update the local JSON storage and update the UI for the 
   // end user.
@@ -63,7 +49,7 @@ function JobList({ tasks, update, getLocalStorage }) {
         <p>{tasks.length} task{(tasks.length !== 1 ? 's' : '')}</p>
         <div className='filters'>
           <ul>
-            <li onClick={filterByAll} id='allFilter'>All</li>
+            <li onClick={filterByAll} id='allFilter' className='selected'>All</li>
             <li onClick={filterByActive} id='activeFilter'>Active</li>
             <li><div id="activeColour"></div></li>
             <li onClick={filterByCompleted} id='completedFilter'>Completed</li>

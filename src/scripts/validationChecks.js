@@ -8,7 +8,7 @@ export function checkTaskAndDate(task, completionDate) {
   const dateError = document.getElementById('dateError');
   let valid = true;
 
-  if (task.value.length > 0) {
+  if (task.length > 0) {
     taskError.textContent = ''; // Resets content of task warning message.
   }
   else {
@@ -16,7 +16,7 @@ export function checkTaskAndDate(task, completionDate) {
     valid = false; // Set valid flag to false;
   }
 
-  if (isValidDate(completionDate.value)) {
+  if (isValidDate(completionDate)) {
     dateError.textContent = ''; // Resets content of date warning message.
   }
   else {
