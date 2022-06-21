@@ -35,29 +35,26 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
 
   return (
     <section className='jobList'>
+      <div className='view'>
+        <p id='numTasks'>{tasks.length} task{(tasks.length !== 1 ? 's' : '')}</p>
+        <div className='filters'>
+          <ul>
+            <li onClick={filterByAll} id='allFilter' className='selected'>All</li>
+            <li onClick={filterByActive} id='activeFilter'>Active <div id="activeColour"></div></li>
+            <li onClick={filterByCompleted} id='completedFilter'>Completed <div id="completedColour"></div></li>
+          </ul>
+        </div>
+        <button id='clearCompleted' onClick={clearCompleted}>Clear Completed</button>
+      </div>
       {tasks.map((job) => {
         return (
           <Job 
             job={job.task} completionDate={job.completionDate}
             key={job.id} removeTask={removeTask}
             id={job.id} isActive={isActive}
-            highlightAction={highlightAction}
           />
         );
       })}
-      <div className='view'>
-        <p>{tasks.length} task{(tasks.length !== 1 ? 's' : '')}</p>
-        <div className='filters'>
-          <ul>
-            <li onClick={filterByAll} id='allFilter' className='selected'>All</li>
-            <li onClick={filterByActive} id='activeFilter'>Active</li>
-            <li><div id="activeColour"></div></li>
-            <li onClick={filterByCompleted} id='completedFilter'>Completed</li>
-            <li><div id="completedColour"></div></li>
-          </ul>
-        </div>
-        <p id='clearCompleted' onClick={clearCompleted}>Clear Completed</p>
-      </div>
     </section>
   )
 }

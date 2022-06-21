@@ -77,6 +77,7 @@ function App() {
       // Function called to update the UI and local storage.
       updateUserTasks(newTasks, true);
       trie.insertTask(task.value.toLowerCase());
+      task.value = date.value = '';
     }
   }
 

@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .listItem {
     background-color: hsl(235, 24%, 19%);
     padding: 25px;
@@ -19,6 +25,12 @@
     margin-left: 30px;
     text-decoration: none;
     color: hsl(0, 100%, 71%);
+}
+
+.search {
+    background-color: transparent;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 #searchBar {
@@ -77,13 +89,12 @@
     letter-spacing: 1px;
     border: 2px solid white;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.315);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 #addJob:hover {
     background-color: white;
-    color: rgb(55, 33, 175);
-    font-size: 20px;
+    color: rgb(65, 150, 230);
 }
 
 #findTask {
@@ -99,4 +110,20 @@
     padding-left: 10px;
     outline: none;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.315);
+}
+
+@media only screen and (max-width: 432px) {
+    #addJob {
+        display: block;
+        width: 100%;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    #findTask {
+        display: block;
+        width: 100%;
+        margin: auto;
+        margin-bottom: 30px;
+    }
 }
