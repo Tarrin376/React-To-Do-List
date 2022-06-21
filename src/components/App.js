@@ -7,27 +7,39 @@ import { Trie } from '../scripts/taskTrie';
 
 // Trie data structure to allow the user to search for a task.
 const trie = new Trie();
+// Arrow function that will obtain the latest content in the local storage.
 const getLocalStorageJSON = () => JSON.parse(localStorage.getItem('tasks'));
 
-function highlightAction(index) {
+// Method that is responsible for applying the 'selected' css style
+// to either the 'all', 'active', or 'completed' filter buttons. It
+// will remove the 'selected' css style from the previously clicked filter
+// button and apply the style to the new element that was clicked. 
+const highlightAction = (index) => {
   const actions = [
     document.getElementById('allFilter'),
     document.getElementById('activeFilter'),
     document.getElementById('completedFilter'),
   ];
   
+  // Previous element that had the 'selected' css style.
   const prevElement = actions.find((action) => action.classList.contains('selected'));
+  // New element that will have the 'selected' css style applied to it.
   const newElement = actions[index];
   
+  // If a previous element was clicked on, remove the 'selected' css style from it.
   if (prevElement != null) prevElement.classList.remove('selected');
   newElement.classList.add('selected');
-}
+};
 
+// Promise that will fetch the results from the trie as the user types
+// out the task that they are looking for. It will return the suggestions
+// gathered by the trie or it will throw an exception if an issue 
+// occurred during the process.
 const fetchResults = (eventRaiser) => {
   return new Promise((resolve, reject) => {
     try {
-      const content = eventRaiser.target.value.replace(/ /g, '');
-      const suggestions = trie.getSuggestions(content);
+      const content = eventRaiser.target.value.replace(/ /g, ''); // Remove whitespaces.
+      const suggestions = trie.getSuggestions(content); // Obtain search results.
       resolve(suggestions);
     }
     catch (Exception) {
@@ -37,12 +49,12 @@ const fetchResults = (eventRaiser) => {
 }
 
 function App() {
-  // Returns the current tasks that are stored on the browser in local storage.
   // Holds the current state of the 'tasks' array so new data can be rendered onto the page. 
   if (localStorage.getItem('tasks') == null) localStorage.setItem('tasks', JSON.stringify([]));
   const [curTasks, updateState] = useState(getLocalStorageJSON());
   const allTasks = getLocalStorageJSON().map((x) => x.task);
-
+  
+  // Inserts each task into the trie so the user can search for tasks.
   allTasks.forEach((task) => {
     trie.insertTask(task.toLowerCase())
   });
@@ -71,25 +83,29 @@ function App() {
         task: task.value,
         completionDate: date.value
       }, ...getLocalStorageJSON()];
-      
-      // Function called to update the UI and local storage.
-      updateUserTasks(newTasks, true);
-      trie.insertTask(task.value.toLowerCase());
-      task.value = date.value = '';
+
+      updateUserTasks(newTasks, true); // Update the UI and local storage.
+      trie.insertTask(task.value.toLowerCase()); // Insert new task into the trie.
+      task.value = date.value = ''; // Reset the input boxes.
     }
   }
-
+  
+  // Asynchronous method that will wait for the results to be 
+  // recieved from the 'fetchResults' Promise. After it obtains the
+  // search results, it will update the UI with those search results
+  // so the user can find their task quicker.
   async function findTasks(eventRaiser) {
     try {
-      const results = await fetchResults(eventRaiser);
-      updateUserTasks(getLocalStorageJSON().filter((x) => {
+      const results = await fetchResults(eventRaiser); // Wait for a result from the Promise.
+      updateUserTasks(getLocalStorageJSON().filter((x) => { // Update the UI with the results.
         const task = x.task.replace(/ /g, '');
         return results.has(task);
       }, false));
       highlightAction(0);
     }
     catch (Exception) {
-      alert(`Something went wrong: ${Exception}`);
+      // Output a message to the user if an error occurs.
+      alert(`Something went wrong: ${Exception}`); 
     }
   }
   

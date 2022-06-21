@@ -7,7 +7,11 @@ import '../styles/JobList.css';
 // date and comparing it with the completion date specified. This will then by presented to the user
 // via coloured circles e.g. 'aqua': active and 'rgb(12, 199, 12)': completed.
 function Job(props) {
-  const selectElement = (eventRaiser) => {
+  // Method that is responsible for adding and removing the 'selected' css style
+  // when the user clicks on the 'all', 'active', or 'completed' filter
+  // buttons. The 'ticked' class is added to the element to override the
+  // background of the element.
+  function selectElement(eventRaiser) {
     const target = eventRaiser.currentTarget;
     if (!target.classList.contains('ticked')) {
       target.classList.add('ticked');
@@ -17,9 +21,11 @@ function Job(props) {
       target.classList.remove('ticked');
       target.children[0].classList.remove('ticked');
     }
-  };
+  }
 
   // Job component that will be manipulated by the JobsList component.
+  // Will display the task and completion date and will allow the user
+  // to modify that content.
   return (
     <div className='listItem' id='job'>
         <div className='unticked' onClick={selectElement}>

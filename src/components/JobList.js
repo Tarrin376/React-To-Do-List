@@ -12,27 +12,37 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
     const filteredTasks = getLocalStorage().filter((task) => task.id !== id);
     update(filteredTasks, true);
   }
-
+  
+  // This method will remove all of the current filters applied to
+  // the to-do list so the user can see all of their tasks.
   const filterByAll = () => {
     update(getLocalStorage(), false); // Removes all current filters.
-    highlightAction(0);
+    highlightAction(0); // Apply the 'selected' css style to the 'filter all' element.
   }
   
-  const isActive = (completionDate) => new Date(completionDate) > new Date(); // Returns a boolean value whether the task is complete or not.
+  const isActive = (completed) => new Date(completed) > new Date(); // Returns a boolean value whether the task is complete or not.
   const clearCompleted = () => update(getLocalStorage().filter((task) => isActive(task.completionDate)), true); // Removes all completed tasks.
-
+  
+  // Filters the tasks in the list by whether it is currently active. 
+  // It also applies the 'selected' css style to inform the user that
+  // the button has been clicked. 
   function filterByActive() {
-    const activeTasks = getLocalStorage().filter((task) => isActive(task.completionDate));
-    update(activeTasks, false);
-    highlightAction(1);
+    const activeTasks = getLocalStorage().filter((task) => isActive(task.completionDate)); // Get all active tasks.
+    update(activeTasks, false); // Update the UI with just active tasks.
+    highlightAction(1); // Apply the 'selected' css style.
   }
-
+  
+  // Filters the tasks in the list by whether it has been completed.
+  // The 'selected' css style is applied and all active tasks are filtered
+  // out of the UI.
   function filterByCompleted() {
-    const completedTasks = getLocalStorage().filter((task) => !isActive(task.completionDate));
-    update(completedTasks, false);
-    highlightAction(2);
+    const completedTasks = getLocalStorage().filter((task) => !isActive(task.completionDate)); // Get all completed tasks.
+    update(completedTasks, false); // Update the UI with just completed tasks.
+    highlightAction(2); // Apply the 'selected' css style.
   }
-
+  
+  // Job list component that will display of the completed and
+  // active tasks that the user has added.
   return (
     <section className='jobList'>
       <div className='view'>
