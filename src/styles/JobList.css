@@ -161,6 +161,10 @@
     transition: 0.1s all linear;
 }
 
+#allFilter:hover, #activeFilter:hover, #completedFilter:hover {
+    background-color: rgb(60, 143, 221);
+}
+
 #edit {
     border: none;
     background-color: rgb(60, 143, 221);
