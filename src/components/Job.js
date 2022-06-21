@@ -32,8 +32,8 @@ function Job(props) {
             <div id='inner'></div>
         </div>
         <div className='jobInfo'>
-            <span>{props.job}</span><div id={props.isActive(props.completionDate) ? 'activeColour' : 'completedColour'}></div>
-            <span id="completionDate">Complete by: {props.completionDate}</span>
+            <p>{props.job}</p><div id={props.isActive(props.completionDate) ? 'activeColour' : 'completedColour'}></div>
+            <p id="completionDate">Complete by: {props.completionDate}</p>
             <button id='edit'>Edit</button>
             <img src={require('../images/bin.png')} id="removeTask" alt="Delete task" onClick={() => props.removeTask(props.id)}/>
         </div>

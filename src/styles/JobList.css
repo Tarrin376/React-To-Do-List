@@ -28,6 +28,16 @@
     cursor: auto;
 }
 
+#inner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 2.5px;
+    margin-top: 3px;
+    background-color: hsl(235, 24%, 19%);
+}
+
 #completedColour {
     background-color: rgb(23, 255, 23);
 }
@@ -41,7 +51,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-color: rgb(158, 77, 206) !important;
+    background-color: rgb(60, 143, 221) !important;
 }
 
 .unticked {
@@ -52,13 +62,20 @@
 }
 
 .unticked:hover {
-    background: rgb(158, 77, 206);
+    background: rgb(60, 143, 221);
 }
 
 .jobInfo * {
     color: hsl(236, 33%, 92%);
     background-color: transparent;
     font-size: 1.1rem;
+}
+
+.listItem {
+    background-color: hsl(234, 19%, 21%);
+    padding: 25px;
+    display: flex;
+    align-items: center;
 }
 
 .jobInfo {
@@ -68,6 +85,10 @@
     width: 100%;
     background-color: transparent;
     gap: 20px;
+}
+
+.jobInfo p {
+    padding-top: 2px;
 }
 
 #completionDate {
@@ -86,13 +107,13 @@
     align-items: center;
     padding: 15px 25px 15px 25px;
     color: white;
-    background-color: hsl(235, 24%, 19%);
+    background-color: hsl(234, 19%, 21%);
     user-select: none;
     font-size: 1.1rem;
 }
 
 .selected {
-    background-color: rgb(65, 150, 230) !important;
+    background-color: rgb(60, 143, 221) !important;
 }
 
 .filters ul {
@@ -142,7 +163,7 @@
 
 #edit {
     border: none;
-    background-color: rgb(158, 77, 206);
+    background-color: rgb(60, 143, 221);
     padding-left: 6px;
     padding-right: 6px;
     border-radius: 5px;
@@ -152,7 +173,7 @@
 }
 
 #edit:hover {
-    background-color: rgb(135, 55, 182);
+    background-color: rgb(76, 166, 250);
 }
 
 @media only screen and (max-width: 660px) {

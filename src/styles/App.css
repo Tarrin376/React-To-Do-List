@@ -11,7 +11,7 @@
 main {
   max-width: 750px;
   width: 90%;
-  background-color: rgb(65, 150, 230);
+  background-color: rgb(128, 39, 212);
   border-radius: 20px;
   position: absolute;
   left: 50%;
@@ -23,7 +23,7 @@ main {
 header {
   display: flex;
   align-items: center;
-  background-color: rgb(65, 150, 230);
+  background-color: rgb(128, 39, 212);
   padding: 30px;
 }
 
@@ -45,7 +45,7 @@ header {
 
 #tasks {
   color: white;
-  background: linear-gradient(to top right, rgb(82, 165, 241) 10%, rgb(71, 152, 228));
+  background: linear-gradient(to top right, rgb(128, 39, 212)10%, rgb(128, 39, 212));
   padding-bottom: 15px;
   padding-top: 20px;
   padding-left: 20px;
