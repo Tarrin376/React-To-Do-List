@@ -41,7 +41,7 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-    background-color: hsl(9, 100%, 67%) !important;
+    background-color: rgb(158, 77, 206) !important;
 }
 
 .unticked {
@@ -52,7 +52,7 @@
 }
 
 .unticked:hover {
-    background: hsl(9, 100%, 67%);
+    background: rgb(158, 77, 206);
 }
 
 .jobInfo * {

@@ -25,16 +25,14 @@ function highlightAction(index) {
 
 const fetchResults = (eventRaiser) => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      try {
-        const content = eventRaiser.target.value.replace(/ /g, '');
-        const suggestions = trie.getSuggestions(content);
-        resolve(suggestions);
-      }
-      catch (Exception) {
-        reject(new Error(Exception.message));
-      }
-    }, 500);
+    try {
+      const content = eventRaiser.target.value.replace(/ /g, '');
+      const suggestions = trie.getSuggestions(content);
+      resolve(suggestions);
+    }
+    catch (Exception) {
+      reject(new Error(Exception.message));
+    }
   });
 }
 
