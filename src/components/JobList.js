@@ -2,6 +2,8 @@ import React from 'react'
 import Job from './Job';
 import '../styles/JobList.css';
 
+const selectedJobs = new Set();
+
 // JobList react component that is used to render all of the user's completed and
 // active tasks. 
 function JobList({ tasks, update, getLocalStorage, highlightAction }) {
@@ -40,6 +42,12 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
     update(completedTasks, false); // Update the UI with just completed tasks.
     highlightAction(2); // Apply the 'selected' css style.
   }
+
+  function removeSelected() {
+    const unselectedTasks = getLocalStorage().filter((task) => !selectedJobs.has(task.id));
+    update(unselectedTasks, true);
+    highlightAction(0);
+  }
   
   // Job list component that will display of the completed and
   // active tasks that the user has added.
@@ -54,6 +62,7 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
             <li onClick={filterByCompleted} id='completedFilter'>Completed <div id="completedColour"></div></li>
           </ul>
         </div>
+        <button id='deleteTasks' onClick={removeSelected}>Delete Selected</button>
         <button id='clearCompleted' onClick={clearCompleted}>Clear Completed</button>
       </div>
       {tasks.map((job) => {
@@ -62,6 +71,7 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
             job={job.task} completionDate={job.completionDate}
             key={job.id} removeTask={removeTask}
             id={job.id} isActive={isActive}
+            selectedJobs={selectedJobs}
           />
         );
       })}

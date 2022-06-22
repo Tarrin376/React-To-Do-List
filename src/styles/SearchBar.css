@@ -4,21 +4,11 @@
     box-sizing: border-box;
 }
 
-.checkBox {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-image: url('../images/icon-check.svg'), linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
-    background-repeat: no-repeat;
-    background-position: center;
-    cursor: pointer;
-}
-
 .errorMessage {
     font-size: 1rem;
     margin-left: 30px;
     text-decoration: none;
-    color: hsl(0, 100%, 71%);
+    color: hsl(0, 100%, 72%);
 }
 
 .search {
@@ -35,6 +25,7 @@
     display: block;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.274);
     border: 1px solid hsl(236, 24%, 11%);
+    transition: 0.2s background-color linear;
 }
 
 #searchBar span {
@@ -94,6 +85,15 @@
     padding-left: 10px;
     outline: none;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.315);
+    transition: 0.2s background-color linear;
+}
+
+#findTask::placeholder {
+    color: rgb(255, 255, 255);
+}
+
+.lightPlaceholder::placeholder {
+  color: black !important;
 }
 
 @media only screen and (max-width: 432px) {

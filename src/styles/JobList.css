@@ -20,7 +20,7 @@
 }
 
 #activeColour, #completedColour {
-    background-color: rgb(255, 166, 0);
+    background-color: rgb(255, 126, 51);
     height: 10px;
     width: 10px;
     display: inline-block;
@@ -110,10 +110,21 @@
     background-color: hsl(234, 19%, 21%);
     user-select: none;
     font-size: 1.1rem;
+    transition: 0.2s background-color linear;
 }
 
 .selected {
     background-color: rgb(60, 143, 221) !important;
+}
+
+.lightModeView {
+    background-color: rgb(60, 143, 221) !important;
+    border: 1px solid rgb(60, 143, 221) !important;
+}
+
+.lightModeView:hover {
+    background-color: rgb(86, 156, 221) !important;
+    border: 1px solid rgb(86, 156, 221) !important;
 }
 
 .filters ul {
@@ -136,6 +147,7 @@
     font-size: 1.1rem;
     border: 1px solid hsl(128, 48%, 43%);
     transition: 0.1s all linear;
+    width: 155px;
 }
 
 #clearCompleted:hover {
@@ -180,7 +192,30 @@
     background-color: rgb(76, 166, 250);
 }
 
-@media only screen and (max-width: 660px) {
+#deleteTasks {
+    background-color: hsl(9, 88%, 60%);
+    padding: 4px 7px 2px 7px;
+    width: 155px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 1.1rem;
+    border: 1px solid hsl(9, 88%, 60%);
+    transition: 0.1s all linear;
+}
+
+#deleteTasks:hover {
+    border: 1px solid hsl(9, 80%, 61%);
+    background-color: hsl(9, 80%, 61%);
+}
+
+#deleteTasks:active {
+    background-color: hsl(9, 86%, 58%);
+    border: 1px solid hsl(9, 86%, 58%);
+}
+
+@media only screen and (max-width: 900px) {
     .view {
         flex-wrap: wrap;
         gap: 20px;

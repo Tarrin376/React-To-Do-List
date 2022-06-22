@@ -4,12 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background: rgba(5, 8, 22, 0.932);
   font-family: 'Josefin Sans', sans-serif;
 }
 
+body {
+  background: rgba(5, 8, 22, 0.932);
+  transition: 0.2s background-color linear;
+}
+
 main {
-  max-width: 750px;
+  max-width: 800px;
   width: 90%;
   background-color: rgb(128, 39, 212);
   border-radius: 20px;
@@ -43,14 +47,23 @@ header {
   cursor: pointer;
 }
 
+.lightTheme {
+  background-color: white!important;
+}
+
+.lightThemeText {
+  color: rgb(42, 45, 75) !important;
+}
+
 #tasks {
   color: white;
-  background: linear-gradient(to top right, rgb(128, 39, 212)10%, rgb(128, 39, 212));
+  background: linear-gradient(to top right, rgb(132, 50, 209), rgb(134, 32, 230));
   padding-bottom: 15px;
   padding-top: 20px;
   padding-left: 20px;
   font-size: 35px;
   height: fit-content;
+  border-radius: 15px;
 }
 
 @media only screen and (max-width: 400px) {

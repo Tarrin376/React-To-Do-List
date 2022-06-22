@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createElement } from 'react'
 import '../styles/SearchBar.css';
 import '../styles/JobList.css';
 
@@ -16,10 +16,12 @@ function Job(props) {
     if (!target.classList.contains('ticked')) {
       target.classList.add('ticked');
       target.children[0].classList.add('ticked');
+      props.selectedJobs.add(props.id);
     }
     else {
       target.classList.remove('ticked');
       target.children[0].classList.remove('ticked');
+      props.selectedJobs.remove(props.id);
     }
   }
 
