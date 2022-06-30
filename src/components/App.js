@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/App.css';
 import SearchBar from './SearchBar';
 import JobList from './JobList';
-import { checkTaskAndDate } from '../scripts/validationChecks';
+import { checkTaskAndDate, toggleTheme } from '../scripts/processes';
 import { Trie } from '../scripts/taskTrie';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   
   // Inserts each task into the trie so the user can search for tasks.
   allTasks.forEach((task) => {
-    trie.insertTask(task.toLowerCase())
+    trie.insertTask(task.toLowerCase());
   });
 
   // Asynchronous method that will wait for the results to be 
@@ -24,8 +24,7 @@ function App() {
     try {
       const results = await fetchResults(eventRaiser); // Wait for a result from the Promise.
       updateUserTasks(getLocalStorageJSON().filter((x) => { // Update the UI with the results.
-        const task = x.task.replace(/ /g, '');
-        return results.has(task);
+        return results.has(x.task.toLowerCase());
       }, false));
       highlightAction(0);
     }
@@ -55,13 +54,13 @@ function App() {
   // This method runs when the user has requested to add a new task to the to do list. 
   // It generates a new id for the task, checks inputs, and re-renders the tasks onto the
   // page with a new task using the 'useState' hook. 
-  function addNewTask() {
+  function addNewTask(checkTaskBox) {
     let [task, date] = [document.getElementById('taskBox'), document.getElementById('dateBox')]; // User inputs.
     let newID = Math.max(...curTasks.map((task) => task.id)) + 1; // Creates a new unique id.
     newID = (newID === -Infinity) ? 1 : newID;
     
     // Validation to ensure that all inputs are valid. 
-    if (checkTaskAndDate(task.value.trim(), date.value.trim())) {
+    if (checkTaskAndDate(task.value.trim(), date.value.trim()) && checkTaskBox()) {
       // Calls the 'oldTasks' hook to re-render the component with the new task object.
       const newTasks = [{
         id: newID,
@@ -130,42 +129,4 @@ const highlightAction = (index) => {
   // If a previous element was clicked on, remove the 'selected' css style from it.
   if (prevElement != null) prevElement.classList.remove('selected');
   newElement.classList.add('selected');
-};
-
-const toggleTheme = () => {
-  const toggleImage = document.getElementById('toggleTheme');
-  const elements = [
-    document.getElementById('findTask'),
-    document.getElementById('searchBar'),
-    document.querySelector('.view'),
-    document.body
-  ];
-
-  [...document.querySelector('.filters').children[0].children].forEach((listItem) => {
-    if (!listItem.classList.contains('lightModeView')) listItem.classList.add('lightModeView');
-    else listItem.classList.remove('lightModeView');
-  });
-
-  if (!elements[0].classList.contains('lightPlaceholder')) {
-    elements[0].classList.add('lightPlaceholder');
-    toggleImage.src = require('../images/icon-moon.svg').default;
-  }
-  else {
-    elements[0].classList.remove('lightPlaceholder');
-    toggleImage.src = require('../images/icon-sun.svg').default;
-  } 
-
-  elements.forEach((element) => {
-    if (element.classList.contains('lightTheme')) element.classList.remove('lightTheme');
-    else element.classList.add('lightTheme');
-    
-    const children = [...element.children];
-    children.forEach((child) => {
-      let tag = child.tagName.toLowerCase();
-      if (tag !== 'button' && tag !== 'div') {
-        if (child.classList.contains('lightThemeText')) child.classList.remove('lightThemeText');
-        else child.classList.add('lightThemeText');
-      }
-    });
-  });
 };

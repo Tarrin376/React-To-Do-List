@@ -24,7 +24,7 @@ export function checkTaskAndDate(task, completionDate) {
   }
   else {
     // Outputs date warning message to user. 
-    dateError.textContent = 'Date format (dd/mm/yyyy) is required'; 
+    dateError.textContent = 'Date format (dd-mm-yyyy) is required'; 
     valid = false; 
   }
 
@@ -37,13 +37,13 @@ export function checkTaskAndDate(task, completionDate) {
 function isValidDate(dateString)
 {
   // Ensure that the date matches the format 'dd/mm/yyyy'.
-  if(!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
+  if(!/^\d{1,2}-\d{1,2}-\d{4}$/.test(dateString)) {
     return false;
   }
   
   // Split up the date into sections e.g. day, month, year. 
   const months = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-  const parts = dateString.split("/");
+  const parts = dateString.split("-");
   const day = parseInt(parts[0], 10);
   const month = parseInt(parts[1], 10);
   const year = parseInt(parts[2], 10);
@@ -51,4 +51,47 @@ function isValidDate(dateString)
   // Final check to ensure all values are correct.
   return day > 0 && day <= months[month - 1] && month > 0 && month <= 12 
   && year.toString().length === 4 && year < 3000;
+};
+
+export let lightEnabled = false;
+export const toggleTheme = () => {
+  const toggleImage = document.getElementById('toggleTheme');
+  const jobs = document.querySelectorAll('.job');
+  const numTasks = document.getElementById('numTasks');
+  const filters = [...document.querySelector('.filters').children[0].children];
+
+  const elements = [
+    document.getElementById('findTask'),
+    document.getElementById('searchBar'),
+    document.querySelector('.view'),
+    document.body
+  ];
+
+  filters.forEach((listItem) => {
+    if (lightEnabled) listItem.classList.remove('lightModeView');
+    else listItem.classList.add('lightModeView');
+  });
+
+  jobs.forEach((job) => {
+    if (lightEnabled) job.classList.remove('lightJob');
+    else job.classList.add('lightJob');
+  });
+
+  elements.forEach((element) => {
+    if (lightEnabled) element.classList.remove('lightTheme');
+    else element.classList.add('lightTheme');
+  });
+
+  if (lightEnabled) {
+    elements[0].classList.remove('lightPlaceholder');
+    toggleImage.src = require('../images/icon-sun.svg').default;
+    numTasks.classList.remove('lightThemeText');
+    lightEnabled = false;
+  }
+  else {
+    elements[0].classList.add('lightPlaceholder');
+    toggleImage.src = require('../images/icon-moon.svg').default;
+    numTasks.classList.add('lightThemeText');
+    lightEnabled = true;
+  }
 };

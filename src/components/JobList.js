@@ -22,8 +22,21 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
     highlightAction(0); // Apply the 'selected' css style to the 'filter all' element.
   }
   
-  const isActive = (completed) => new Date(completed) > new Date(); // Returns a boolean value whether the task is complete or not.
-  const clearCompleted = () => update(getLocalStorage().filter((task) => isActive(task.completionDate)), true); // Removes all completed tasks.
+  // Returns a boolean value stating whether the completion date of
+  // a certain task has been completed or not.
+  const isActive = (completed) => {
+    const completedDate = new Date(completed.split("-").reverse().join("-"));
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today < completedDate;
+  };
+  
+  // Removes all completed tasks.
+  const clearCompleted = () => {
+    update(getLocalStorage().filter((task) => {
+      isActive(task.completionDate)
+    }), true);
+  }
   
   // Filters the tasks in the list by whether it is currently active. 
   // It also applies the 'selected' css style to inform the user that
@@ -44,7 +57,12 @@ function JobList({ tasks, update, getLocalStorage, highlightAction }) {
   }
 
   function removeSelected() {
-    const unselectedTasks = getLocalStorage().filter((task) => !selectedJobs.has(task.id));
+    const unselectedTasks = [];
+    getLocalStorage().forEach((task) => {
+      if (selectedJobs.has(task.id)) selectedJobs.delete(task.id);
+      else unselectedTasks.push(task);
+    });
+
     update(unselectedTasks, true);
     highlightAction(0);
   }

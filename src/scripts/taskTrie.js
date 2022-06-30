@@ -33,15 +33,15 @@ export class Trie {
     }
 
     insertTask(task) {
-        task = task.replace(/ /g, '');
+        const filtered = task.replace(/ /g, '');
         let node = this.root;
 
-        for (let i = 0; i < task.length; i++) {
-            let index = task[i].charCodeAt(0) - 97;
+        for (let i = 0; i < filtered.length; i++) {
+            let index = filtered[i].charCodeAt(0) - 97;
             if (node.children[index] == null) node.children[index] = new TrieNode();
             node = node.children[index];
 
-            if (i === task.length - 1) {
+            if (i === filtered.length - 1) {
                 node.end = true;
                 node.task = task;
             }

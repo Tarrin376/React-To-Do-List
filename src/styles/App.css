@@ -22,6 +22,7 @@ main {
   top: 200px;
   transform: translateX(-50%);
   overflow: hidden;
+  box-shadow: 0px 7px 12px rgba(37, 37, 37, 0.384);
 }
 
 header {
@@ -51,6 +52,10 @@ header {
   background-color: white!important;
 }
 
+.lightTheme span {
+  color: rgb(42, 45, 75) !important;
+}
+
 .lightThemeText {
   color: rgb(42, 45, 75) !important;
 }
@@ -68,6 +73,6 @@ header {
 
 @media only screen and (max-width: 400px) {
   main {
-    width: 100%;
+    width: 95%;
   }
 }

@@ -1,6 +1,7 @@
-import React, { createElement } from 'react'
+import React from 'react'
 import '../styles/SearchBar.css';
 import '../styles/JobList.css';
+import { lightEnabled } from '../scripts/processes';
 
 // Job Component that is utilized by the JobList react component to create a new task requested
 // by the user. It will calculate whether the task has been completed or not by calculating today's
@@ -21,7 +22,7 @@ function Job(props) {
     else {
       target.classList.remove('ticked');
       target.children[0].classList.remove('ticked');
-      props.selectedJobs.remove(props.id);
+      props.selectedJobs.delete(props.id);
     }
   }
 
@@ -29,15 +30,21 @@ function Job(props) {
   // Will display the task and completion date and will allow the user
   // to modify that content.
   return (
-    <div className='listItem' id='job'>
+    <div className={(lightEnabled ? 'lightJob' : '') + ' listItem job'}>
         <div className='unticked' onClick={selectElement}>
             <div id='inner'></div>
         </div>
         <div className='jobInfo'>
-            <p>{props.job}</p><div id={props.isActive(props.completionDate) ? 'activeColour' : 'completedColour'}></div>
-            <p id="completionDate">Complete by: {props.completionDate}</p>
-            <button id='edit'>Edit</button>
-            <img src={require('../images/bin.png')} id="removeTask" alt="Delete task" onClick={() => props.removeTask(props.id)}/>
+            <div id="jobDesc">
+              {props.job}
+              <span id="whitespace"></span>
+              <div id={props.isActive(props.completionDate) ? 'activeColour' : 'completedColour'}></div>
+            </div>
+            <div id="jobActions">
+              <p id="completionDate">Complete by: {props.completionDate}</p>
+              <button id='edit'>Edit</button>
+              <img src={require('../images/bin.png')} id="removeTask" alt="Delete task" onClick={() => props.removeTask(props.id)}/>
+            </div>
         </div>
     </div>
   );
